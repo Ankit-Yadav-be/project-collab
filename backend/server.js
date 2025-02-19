@@ -103,10 +103,10 @@ io.on("connection", (socket) => {
   });
 });
 const _dirname = path.resolve();
-app.use(express.static(path.join(_dirname, "/frontend/dist")))
-app.get('*',(_,res)=>{
+app.use(express.static(path.join(_dirname, "/frontend/dist")));
+app.get("*", (_, res) => {
   res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
-})
+});
 
 // Start the server
 server.listen(port, () => {
