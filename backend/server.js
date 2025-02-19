@@ -4,6 +4,7 @@ import app from "./app.js";
 import jwt from "jsonwebtoken"; // Import jwt for token verification
 import projectmodal from "./modal/projectmodel.js";
 import { generatePrompt } from "./service/aiService.js";
+import path from "path";
 dotenv.config();
 
 const port = process.env.PORT || 8000;
@@ -101,6 +102,11 @@ io.on("connection", (socket) => {
     console.log(`User disconnected: ${socket.user?.id}`);
   });
 });
+const _dirname = path.resolve();
+app.use(express.static(path.join(_dirname, "/frontend/dist")))
+app.get('*',(_,res)=>{
+  res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
+})
 
 // Start the server
 server.listen(port, () => {
